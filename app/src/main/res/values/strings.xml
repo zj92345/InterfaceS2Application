@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">InterfaceS2Application</string>
+    <string name="dev_env">debug</string>
+</resources>
