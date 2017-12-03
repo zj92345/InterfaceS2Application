@@ -11,44 +11,48 @@ import com.example.zhaojian.interfaces2application.util.ConfigUtil;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    TextView responseTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ConfigUtil.loadConfig(this);
-        final TextView responseText = (TextView) findViewById(R.id.textView);
+        responseTextView = (TextView) findViewById(R.id.textView);
         Button buttonStart = (Button) findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String response = ServiceInterfaceS2.sendStartRequest();
+                        showResponse(response);
+                    }
+                }).start();
             }
         });
         Button buttonEnd = (Button) findViewById(R.id.buttonEnd);
         buttonEnd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                responseText.setText(ServiceInterfaceS2.sendEndRequest());
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String response = ServiceInterfaceS2.sendEndRequest();
+                        showResponse(response);
+                    }
+                }).start();
             }
         });
     }
 
-    class httpTask implements Runnable{
-
-        @Override
-        public void run() {
-
-        }
+    private void showResponse(final String responseText){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                responseTextView.setText(responseText);
+            }
+        });
     }
-
-    Runnable httpTask = new Runnable() {
-        @Override
-        public void run() {
-            // TODO
-//            responseText.setText(ServiceInterfaceS2.sendStartRequest());
-        }
-    };
-
-
 
 }

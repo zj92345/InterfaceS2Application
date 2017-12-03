@@ -18,5 +18,7 @@
         <!-- 开发环境：debug；测试环境：test；生产环境：online-->
         <meta-data android:value="debug" android:name="DEV_ENV"/>
     </application>
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
