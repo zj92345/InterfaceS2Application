@@ -19,24 +19,28 @@ public class ServiceInterfaceS2 {
 
     public static MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static void sendSartRequest(){
+    public static String sendStartRequest(){
+        String responseStr = "";
         RMControllerStartRequest requestBean = new RMControllerStartRequest();
         RequestBody requestBody = RequestBody.create(JSON,new Gson().toJson(requestBean));
         try {
-            HttpUtil.sendPostRequest(ConfigUtil.getValue("INTERFACE_START_URL"),requestBody);
+            responseStr = HttpUtil.sendPostRequest(ConfigUtil.getValue("INTERFACE_START_URL"),requestBody);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return responseStr;
     }
 
-    public static void sendEndRequest(){
+    public static String sendEndRequest(){
+        String responseStr = "";
         RMControllerEndRequest requestBean = new RMControllerEndRequest();
         RequestBody requestBody = RequestBody.create(JSON,new Gson().toJson(requestBean));
         try {
-            HttpUtil.sendPostRequest(ConfigUtil.getValue("INTERFACE_END_URL"),requestBody);
+            responseStr = HttpUtil.sendPostRequest(ConfigUtil.getValue("INTERFACE_END_URL"),requestBody);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return responseStr;
     }
 
 }

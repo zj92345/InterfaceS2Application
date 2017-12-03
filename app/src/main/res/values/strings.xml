@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">InterfaceS2Application</string>
     <string name="dev_env">debug</string>
+    <string name="button_start">启动远控</string>
+    <string name="button_end">停止远控</string>
 </resources>
